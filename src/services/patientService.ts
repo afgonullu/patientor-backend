@@ -5,13 +5,17 @@ import { v4 as uuidv4 } from "uuid"
 import { Patient, NonSensitivePatient, NewPatient } from "../types"
 
 const getPatients = (): NonSensitivePatient[] => {
-  return patientData.map(({ id, name, dateOfBirth, gender, occupation }) => ({
-    id,
-    name,
-    dateOfBirth,
-    gender,
-    occupation,
-  }))
+  return patientData.map(
+    ({ id, name, dateOfBirth, gender, occupation, entries, ssn }) => ({
+      id,
+      name,
+      dateOfBirth,
+      gender,
+      occupation,
+      entries,
+      ssn,
+    })
+  )
 }
 
 const getPatient = (id: string): NonSensitivePatient | undefined => {
