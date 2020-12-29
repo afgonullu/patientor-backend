@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import express from "express"
 import patientService from "../services/patientService"
+import entryService from "../services/entryService"
 // import { Patient } from "../types"
 import toNewPatient from "../utils"
 
@@ -29,6 +30,18 @@ router.get("/:id", (req, res) => {
   const patient = patientService.getPatient(req.params.id)
 
   res.send(patient)
+})
+
+router.post("/:id/entries", (req, res) => {
+  try {
+    const newEntry = req.body
+    console.log(newEntry)
+
+    const addedEntry = entryService.addEntry(req.params.id, newEntry)
+    res.json(addedEntry)
+  } catch (e) {
+    res.status(400).send(e.message)
+  }
 })
 
 export default router
